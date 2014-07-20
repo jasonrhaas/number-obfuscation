@@ -61,35 +61,19 @@ class IST_Software_Dev():
         # cleaned phone number to the results list
         # Ex:
         # self.myList.append(self.myCounter)
-	words = dict(one='1', two='2', three='3', four='4', five='5', six='6', seven='7', eight='8', nine='9')
-	newLine = aLine.lower()
-	for key, value in words.items():
-		newLine = newLine.replace(key, value)
-        p = re.compile(r'''
-        (\d)    # match any digit
-	\D*?	# matching anything other than a digit
-        (\d)    # match any digit
-	\D*?	# matching anything other than a digit
-        (\d)    # match any digit
-	\D*?	# matching anything other than a digit
-        (\d)    # match any digit
-	\D*?	# matching anything other than a digit
-        (\d)    # match any digit
-	\D*?	# matching anything other than a digit
-        (\d)    # match any digit
-	\D*?	# matching anything other than a digit
-        (\d)    # match any digit
-	\D*?	# matching anything other than a digit
-        (\d)    # match any digit
-	\D*?	# matching anything other than a digit
-        (\d)    # match any digit
-	\D*?	# matching anything other than a digit
-        (\d)    # match any digit
-        ''', re.VERBOSE)
-	m = p.findall(newLine)
-	if m:
-		for arr in m:
-			print "line",self.myCounter,":","".join(arr)
+
+    	words = dict(oh='1', one='1', two='2', three='3', four='4', five='5', six='6', seven='7', eight='8', nine='9')
+    	newLine = aLine.lower()                # make the string lowercase
+    	for key, value in words.items():       # iterate over the key, value pairs and do a substitution
+    		newLine = newLine.replace(key, value)
+        # Create a regular expression to use for matching
+        # The following regex just matches any digit, junk, digit, junk, etc, and captures the digits
+        p = re.compile(r'(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)\D*(\d)')
+    	m = p.findall(newLine)                 # Find any all occurances of the match in the string
+        if m:
+            for num in m:                      # Need to iteate over 'm' because 'findall' can return tuples
+                # print "line",self.myCounter,":","".join(num)
+                self.myList.append("".join(num))    # Apprend the number to the list
     """
     Writes the results of the findings
     This will write a file that looks like:
